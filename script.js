@@ -1,0 +1,430 @@
+/* ═══════════════════════════════════════════════════════
+   Antonia Comfort — script.js
+   ═══════════════════════════════════════════════════════ */
+
+const WHATSAPP_NUMBER = "385919191235";
+const FORMSPREE_ID    = "YOUR_FORM_ID"; // formspree.io → New Form → copy ID
+
+/* ── Category definitions ──────────────────────────────── */
+const categoryDefs = [
+  { key: "medicinske-klompe", label: "Medicinske Klompe", image: "images/photo_17_2026-03-31_22-30-34.jpg" },
+  { key: "kozne-klompe",      label: "Kožne Klompe",      image: "images/photo_27_2026-03-31_22-30-34.jpg" },
+  { key: "radne-klompe",      label: "Radne Klompe",      image: "images/photo_26_2026-03-31_22-30-34.jpg" },
+  { key: "papuce",            label: "Papuče",             image: "images/photo_15_2026-03-31_22-30-34.jpg" },
+];
+
+/* ── Product data generation ───────────────────────────── */
+const sizeOptions  = ["36-41", "36-42", "37-42", "38-46", "39-46"];
+const colorOptions = ["Bijela", "Krem", "Antracit", "Maslinasta", "Navy", "Pijesak", "Taupe", "Cognac"];
+const nameWords    = ["Pro", "Med", "Comfort", "Classic", "Active", "Soft", "Elite", "Basic"];
+const moqOptions   = [50, 80, 100, 120, 150];
+
+function buildProductFiles() {
+  const files = [];
+  for (let i = 1; i <= 41; i++) {
+    files.push(`photo_${i}_2026-03-31_22-30-12.jpg`);
+    files.push(`photo_${i}_2026-03-31_22-30-34.jpg`);
+  }
+  for (let i = 42; i <= 92; i++) {
+    files.push(`photo_${i}_2026-03-31_22-30-12.jpg`);
+    files.push(`photo_${i}_2026-03-31_22-30-35.jpg`);
+  }
+  for (let i = 93; i <= 100; i++) {
+    files.push(`photo_${i}_2026-03-31_22-30-12.jpg`);
+  }
+  return files;
+}
+
+function getVariant(file) {
+  if (file.includes("22-30-35")) return "B";
+  if (file.includes("22-30-34")) return "A";
+  return "C";
+}
+
+function createProduct(file, index) {
+  const m   = file.match(/photo_(\d+)_/);
+  const num = Number(m?.[1] || index + 1);
+  const vOf = file.includes("22-30-35") ? 2 : file.includes("22-30-34") ? 1 : 0;
+  const cat  = categoryDefs[(num - 1) % categoryDefs.length];
+  const v    = getVariant(file);
+  const sku  = `UV-${String(num).padStart(3, "0")}-${v}`;
+
+  return {
+    id:            sku.toLowerCase(),
+    sku,
+    name:          `${cat.label.split(" ")[0]} ${nameWords[(num + vOf) % nameWords.length]}`,
+    image:         `images/${file}`,
+    categoryKey:   cat.key,
+    categoryLabel: cat.label,
+    color:         colorOptions[(num + vOf) % colorOptions.length],
+    size:          sizeOptions[(num + vOf) % sizeOptions.length],
+    moq:           moqOptions[(num + index) % moqOptions.length],
+    description:   "Premium model pripremljen za veleprodajne kupce koji traže stabilnu kvalitetu, jasne MOQ uvjete i dugoročnu poslovnu suradnju.",
+  };
+}
+
+const products = buildProductFiles().map(createProduct);
+
+/* ── Render catalog card (new design) ──────────────────── */
+function renderCatalogCard(product, index) {
+  return `
+    <article class="product-card">
+      <a class="product-card-img-wrap" href="proizvod.html?id=${product.id}">
+        <img src="${product.image}" alt="${product.name}" loading="lazy" />
+      </a>
+      <div class="product-card-body">
+        <p class="product-card-sku">${product.sku}</p>
+        <h3 class="product-card-name">${product.name}</h3>
+        <p class="product-card-meta">MOQ ${product.moq} pari &nbsp;·&nbsp; Vel. ${product.size}</p>
+        <a class="product-card-btn" href="#inquiry-modal"
+           data-open-inquiry data-product="${product.name}">Zatraži ponudu</a>
+      </div>
+    </article>`;
+}
+
+/* ── Catalog page ───────────────────────────────────────── */
+function renderCatalogPage() {
+  const productGrid    = document.getElementById("productGrid");
+  const countEl        = document.getElementById("catalogCount");
+  const emptyEl        = document.getElementById("catalogEmpty");
+  const sizeFiltersEl  = document.getElementById("sizeFilters");
+  const resetBtn       = document.getElementById("filterReset");
+  const mobileCatSel   = document.getElementById("mobileCatSelect");
+  const mobileSizeSel  = document.getElementById("mobileSizeSelect");
+  const mobileResetBtn = document.getElementById("mobileFilterReset");
+
+  if (!productGrid) return;
+
+  /* Render size checkboxes (desktop sidebar) */
+  const allSizes = [...new Set(products.map(p => p.size))].sort();
+  if (sizeFiltersEl) {
+    sizeFiltersEl.innerHTML = allSizes.map(s => `
+      <label class="sidebar-check">
+        <input type="checkbox" class="size-filter" value="${s}" />
+        <span>${s}</span>
+      </label>`).join("");
+  }
+
+  /* Populate mobile size select */
+  if (mobileSizeSel) {
+    allSizes.forEach(s => {
+      const opt = document.createElement("option");
+      opt.value = s;
+      opt.textContent = s;
+      mobileSizeSel.appendChild(opt);
+    });
+  }
+
+  /* Pre-select category from URL */
+  const params = new URLSearchParams(window.location.search);
+  const urlCat = params.get("category");
+  if (urlCat) {
+    const checkbox = document.querySelector(`.cat-filter[value="${urlCat}"]`);
+    if (checkbox) checkbox.checked = true;
+    if (mobileCatSel) mobileCatSel.value = urlCat;
+  }
+
+  function applyFilters() {
+    /* Desktop checkboxes */
+    const checkedCats  = [...document.querySelectorAll(".cat-filter:checked")].map(el => el.value);
+    const checkedSizes = [...document.querySelectorAll(".size-filter:checked")].map(el => el.value);
+
+    /* Mobile selects (take priority if a value is set) */
+    const mobileCat  = mobileCatSel?.value  || "";
+    const mobileSize = mobileSizeSel?.value || "";
+
+    const activeCats  = mobileCat  ? [mobileCat]  : checkedCats;
+    const activeSizes = mobileSize ? [mobileSize] : checkedSizes;
+
+    const filtered = products.filter(p => {
+      const catOk  = activeCats.length  === 0 || activeCats.includes(p.categoryKey);
+      const sizeOk = activeSizes.length === 0 || activeSizes.includes(p.size);
+      return catOk && sizeOk;
+    });
+
+    productGrid.innerHTML = filtered.map(renderCatalogCard).join("");
+    if (countEl) countEl.textContent = `${filtered.length} modela`;
+    if (emptyEl) emptyEl.hidden = filtered.length > 0;
+  }
+
+  /* Desktop checkbox listeners */
+  document.addEventListener("change", e => {
+    if (e.target.classList.contains("cat-filter") ||
+        e.target.classList.contains("size-filter")) {
+      applyFilters();
+    }
+  });
+
+  /* Mobile select listeners */
+  mobileCatSel?.addEventListener("change",  applyFilters);
+  mobileSizeSel?.addEventListener("change", applyFilters);
+
+  /* Desktop reset */
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      document.querySelectorAll(".cat-filter, .size-filter").forEach(el => (el.checked = false));
+      if (mobileCatSel)  mobileCatSel.value  = "";
+      if (mobileSizeSel) mobileSizeSel.value = "";
+      applyFilters();
+    });
+  }
+
+  /* Mobile reset */
+  if (mobileResetBtn) {
+    mobileResetBtn.addEventListener("click", () => {
+      if (mobileCatSel)  mobileCatSel.value  = "";
+      if (mobileSizeSel) mobileSizeSel.value = "";
+      document.querySelectorAll(".cat-filter, .size-filter").forEach(el => (el.checked = false));
+      applyFilters();
+    });
+  }
+
+  applyFilters();
+}
+
+/* ── Product detail page ───────────────────────────────── */
+function renderProductPage() {
+  const detailRoot  = document.getElementById("productDetail");
+  const relatedGrid = document.getElementById("relatedGrid");
+  const breadcrumb  = document.getElementById("productBreadcrumb");
+
+  if (!detailRoot) return;
+
+  const params  = new URLSearchParams(window.location.search);
+  const product = products.find(p => p.id === params.get("id")) || products[0];
+
+  if (breadcrumb) breadcrumb.textContent = product.name;
+  document.title = `Antonia Comfort | ${product.name}`;
+
+  const waText = encodeURIComponent(
+    `Pozdrav! Zanima me model ${product.name} (${product.sku}). Možete li poslati informacije o MOQ uvjetima i dostupnosti?`
+  );
+
+  detailRoot.innerHTML = `
+    <div class="detail-media">
+      <div class="detail-image-frame">
+        <img src="${product.image}" alt="${product.name}" />
+      </div>
+    </div>
+    <div class="detail-copy">
+      <span class="detail-pill">${product.categoryLabel} &nbsp;·&nbsp; ${product.sku}</span>
+      <h1 class="detail-title">${product.name}</h1>
+      <p class="detail-description">${product.description}</p>
+
+      <div class="detail-specs">
+        <div class="detail-spec">
+          <p class="detail-spec-label">Kategorija</p>
+          <p class="detail-spec-value">${product.categoryLabel}</p>
+        </div>
+        <div class="detail-spec">
+          <p class="detail-spec-label">MOQ</p>
+          <p class="detail-spec-value">${product.moq} pari</p>
+        </div>
+        <div class="detail-spec">
+          <p class="detail-spec-label">Veličine</p>
+          <p class="detail-spec-value">${product.size}</p>
+        </div>
+        <div class="detail-spec">
+          <p class="detail-spec-label">Boja</p>
+          <p class="detail-spec-value">${product.color}</p>
+        </div>
+      </div>
+
+      <ul class="detail-features">
+        <li>Premium materijali certificirani za profesionalnu upotrebu</li>
+        <li>Dostupan u više boja i veličinskih raspona</li>
+        <li>OEM i Private Label mogućnosti</li>
+        <li>Brza EU dostava, pouzdani rokovi isporuke</li>
+      </ul>
+
+      <div class="detail-actions">
+        <a class="btn btn-black btn-lg" href="#inquiry-modal"
+           data-open-inquiry data-product="${product.name}">Zatraži ponudu</a>
+        <a class="btn btn-outline-black btn-lg"
+           href="https://wa.me/${WHATSAPP_NUMBER}?text=${waText}"
+           target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          WhatsApp
+        </a>
+        <a class="btn btn-outline-black btn-lg" href="katalog.html?category=${product.categoryKey}">
+          Pogledaj kolekciju
+        </a>
+      </div>
+    </div>`;
+
+  if (relatedGrid) {
+    const related = products
+      .filter(p => p.categoryKey === product.categoryKey && p.id !== product.id)
+      .slice(0, 3);
+
+    relatedGrid.innerHTML = related.map((p, i) => `
+      <article class="product-card">
+        <a class="product-card-img-wrap" href="proizvod.html?id=${p.id}">
+          <img src="${p.image}" alt="${p.name}" loading="lazy" />
+        </a>
+        <div class="product-card-body">
+          <p class="product-card-sku">${p.sku}</p>
+          <h3 class="product-card-name">${p.name}</h3>
+          <p class="product-card-meta">MOQ ${p.moq} pari &nbsp;·&nbsp; Vel. ${p.size}</p>
+          <a class="product-card-btn" href="proizvod.html?id=${p.id}">Pogledaj model</a>
+        </div>
+      </article>`).join("");
+  }
+
+}
+
+
+/* ── Inquiry modal ─────────────────────────────────────── */
+function setupInquiryModal() {
+  const modal       = document.getElementById("inquiryModal");
+  const form        = document.getElementById("inquiryForm");
+  const successEl   = document.getElementById("inquirySuccess");
+  const submitBtn   = document.getElementById("inquirySubmit");
+  const contextEl   = document.getElementById("inquiryContext");
+  const msgArea     = form?.querySelector('textarea[name="message"]');
+
+  if (!modal || !form) return;
+
+  function open(productName) {
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    if (successEl) { successEl.hidden = true; successEl.innerHTML = ""; }
+
+    if (productName && contextEl) {
+      contextEl.hidden = false;
+      contextEl.textContent = `Upit za: ${productName}`;
+      if (msgArea && !msgArea.value.trim()) {
+        msgArea.value = `Zanima nas model ${productName}. Molimo informacije o MOQ količinama i roku isporuke.`;
+      }
+    } else if (contextEl) {
+      contextEl.hidden = true;
+      contextEl.textContent = "";
+    }
+    setTimeout(() => form.querySelector('input[name="name"]')?.focus(), 120);
+  }
+
+  function close() {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+  }
+
+  document.addEventListener("click", e => {
+    if (!(e.target instanceof Element)) return;
+    const trigger = e.target.closest("[data-open-inquiry]");
+    if (trigger) { e.preventDefault(); open(trigger.dataset.product || ""); return; }
+    if (e.target.closest("[data-close-inquiry]")) close();
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) close();
+  });
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    if (!submitBtn) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Šalje se...";
+    if (successEl) { successEl.hidden = true; successEl.innerHTML = ""; }
+
+    const waFallback = `<br><a class="wa-fallback-link" href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener">Kontaktirajte nas na WhatsApp →</a>`;
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        if (successEl) {
+          successEl.innerHTML = "Upit je zaprimljen. Javit ćemo se uskoro.";
+          successEl.hidden = false;
+        }
+        form.reset();
+        if (contextEl) { contextEl.hidden = true; contextEl.textContent = ""; }
+      } else {
+        if (successEl) { successEl.innerHTML = `Slanje nije uspjelo.${waFallback}`; successEl.hidden = false; }
+      }
+    } catch {
+      if (successEl) { successEl.innerHTML = `Greška pri slanju.${waFallback}`; successEl.hidden = false; }
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Pošalji upit";
+    }
+  });
+}
+
+/* ── Homepage contact form ─────────────────────────────── */
+function setupContactForm() {
+  const form    = document.getElementById("contactForm");
+  const msgEl   = document.getElementById("contactMsg");
+  const submitB = form?.querySelector('[type="submit"]');
+
+  if (!form) return;
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    if (!submitB) return;
+    submitB.disabled = true;
+    submitB.textContent = "Šalje se...";
+    if (msgEl) { msgEl.className = "form-msg"; msgEl.style.display = "none"; }
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        if (msgEl) { msgEl.textContent = "Poruka je zaprimljena. Javit ćemo Vam se uskoro."; msgEl.className = "form-msg success visible"; }
+        form.reset();
+      } else {
+        if (msgEl) { msgEl.textContent = "Slanje nije uspjelo. Kontaktirajte nas direktno na WhatsApp."; msgEl.className = "form-msg error visible"; }
+      }
+    } catch {
+      if (msgEl) { msgEl.textContent = "Greška pri slanju. Pokušajte ponovo ili nas kontaktirajte na WhatsApp."; msgEl.className = "form-msg error visible"; }
+    } finally {
+      submitB.disabled = false;
+      submitB.textContent = "Pošalji upit";
+    }
+  });
+}
+
+/* ── Nav toggle (mobile) ───────────────────────────────── */
+function setupNav() {
+  const toggle = document.querySelector(".nav-toggle");
+  const links  = document.querySelector(".nav-links");
+  if (!toggle || !links) return;
+  toggle.addEventListener("click", () => links.classList.toggle("open"));
+}
+
+/* ── Update WA links with real number ──────────────────── */
+function updateWALinks() {
+  document.querySelectorAll('a[href*="385919191235"]').forEach(a => {
+    a.href = a.href.replace("385919191235", WHATSAPP_NUMBER);
+  });
+}
+
+/* ── Reveal on scroll ──────────────────────────────────── */
+function setupReveal() {
+  const els = document.querySelectorAll(".reveal");
+  if (!els.length) return;
+  const obs = new IntersectionObserver(
+    (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("is-visible"); obs.unobserve(e.target); } }),
+    { threshold: 0.12 }
+  );
+  els.forEach(el => obs.observe(el));
+}
+
+/* ── Init ──────────────────────────────────────────────── */
+setupNav();
+setupInquiryModal();
+setupContactForm();
+renderCatalogPage();
+renderProductPage();
+updateWALinks();
+setupReveal();
