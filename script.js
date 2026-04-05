@@ -446,15 +446,37 @@ function setupReveal() {
   els.forEach(el => obs.observe(el));
 }
 
-/* ── i18n ──────────────────────────────────────────────── */
+/* ── i18n — auto-detect language ───────────────────────── */
+function detectLang() {
+  // 1. User has manually chosen → always respect that
+  const saved = localStorage.getItem("ac_lang");
+  if (saved) return saved;
+
+  // 2. Read browser / OS language preference
+  const supported = typeof LANG_META !== "undefined"
+    ? Object.keys(LANG_META)
+    : ["hr","en","de","it","tr","sl","hu","es","fr","ru","ar"];
+
+  const browserLangs = Array.from(navigator.languages || [navigator.language || "hr"]);
+
+  for (const raw of browserLangs) {
+    const code = raw.split("-")[0].toLowerCase();
+    // Croatian / Bosnian / Serbian all map to Croatian version
+    if (["hr","bs","sr"].includes(code)) return "hr";
+    if (supported.includes(code)) return code;
+  }
+
+  return "hr"; // default fallback
+}
+
 function t(key) {
-  const lang = localStorage.getItem("ac_lang") || "hr";
+  const lang = detectLang();
   const dict = (typeof TRANSLATIONS !== "undefined" && TRANSLATIONS[lang]) || {};
   return dict[key] || (TRANSLATIONS?.hr?.[key]) || key;
 }
 
 function applyTranslations() {
-  const lang = localStorage.getItem("ac_lang") || "hr";
+  const lang = detectLang();
   /* RTL for Arabic */
   const isRtl = (typeof LANG_META !== "undefined" && LANG_META[lang]?.rtl) || false;
   document.documentElement.dir = isRtl ? "rtl" : "ltr";
@@ -475,7 +497,7 @@ function setupLangSwitcher() {
   const switcher = document.querySelector(".lang-switcher");
   if (!switcher) return;
 
-  const currentLang = localStorage.getItem("ac_lang") || "hr";
+  const currentLang = detectLang();
   const meta = (typeof LANG_META !== "undefined" && LANG_META[currentLang]) || { flag: "🇭🇷", code: "HR" };
 
   const flagEl = switcher.querySelector(".lang-flag");
