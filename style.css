@@ -2158,10 +2158,6 @@ section {
   background: var(--white);
 }
 
-.partner-logo-item:hover {
-  border-color: var(--black);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-}
 
 .partner-logo-item img {
   height: 40px;
@@ -2172,22 +2168,12 @@ section {
   transition: filter 0.2s, opacity 0.2s;
 }
 
-.partner-logo-item:hover img {
-  filter: grayscale(0%);
-  opacity: 1;
-}
-
 .partner-logo-text {
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   color: var(--mid);
-  transition: color 0.2s;
   white-space: nowrap;
-}
-
-.partner-logo-item:hover .partner-logo-text {
-  color: var(--black);
 }
 
 /* ═══════════════════════════════════════════════════════
