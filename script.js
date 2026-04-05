@@ -399,7 +399,33 @@ function setupNav() {
   const toggle = document.querySelector(".nav-toggle");
   const links  = document.querySelector(".nav-links");
   if (!toggle || !links) return;
-  toggle.addEventListener("click", () => links.classList.toggle("open"));
+
+  function openNav() {
+    links.classList.add("open");
+    toggle.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+  function closeNav() {
+    links.classList.remove("open");
+    toggle.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  toggle.addEventListener("click", () => {
+    links.classList.contains("open") ? closeNav() : openNav();
+  });
+
+  // Close when any nav link is tapped
+  links.querySelectorAll("a").forEach(a => a.addEventListener("click", closeNav));
+
+  // Close when tapping outside the nav
+  document.addEventListener("click", e => {
+    if (links.classList.contains("open") &&
+        !links.contains(e.target) &&
+        !toggle.contains(e.target)) {
+      closeNav();
+    }
+  });
 }
 
 /* ── Update WA links with real number ──────────────────── */

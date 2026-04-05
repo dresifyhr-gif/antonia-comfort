@@ -1677,15 +1677,22 @@ section {
 
   .nav-links.open {
     display: flex;
-    position: absolute;
+    position: fixed;
     top: 64px;
     left: 0;
     right: 0;
+    bottom: 0;
     flex-direction: column;
     gap: 0;
     background: var(--white);
-    border-bottom: 1px solid var(--line);
     z-index: 99;
+    overflow-y: auto;
+    animation: navSlideDown 0.2s ease;
+  }
+
+  @keyframes navSlideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   .nav-links.open a {
@@ -1693,6 +1700,62 @@ section {
     border-bottom: 1px solid var(--line);
     font-size: 0.8rem;
     letter-spacing: 0.14em;
+    opacity: 0.75;
+    transition: opacity 0.15s;
+  }
+  .nav-links.open a:hover,
+  .nav-links.open a.active { opacity: 1; border-bottom: 1px solid var(--line); }
+
+  /* ── Lang-switcher inside mobile nav ── */
+  .nav-links.open .lang-switcher {
+    border-left: none;
+    border-top: 1px solid var(--line);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-links.open .lang-current {
+    padding: 18px 28px;
+    opacity: 0.75;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    justify-content: flex-start;
+    gap: 8px;
+    width: 100%;
+  }
+  .nav-links.open .lang-switcher.open .lang-current { opacity: 1; }
+
+  .nav-links.open .lang-dropdown {
+    position: static;
+    transform: none;
+    top: auto; left: auto;
+    box-shadow: none;
+    border-radius: 0;
+    border: none;
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+    width: 100%;
+    padding: 4px 0;
+    display: none;
+  }
+  .nav-links.open .lang-switcher.open .lang-dropdown { display: block; }
+
+  .nav-links.open .lang-dropdown li {
+    padding: 12px 28px;
+    border-bottom-color: transparent;
+    font-size: 0.82rem;
+  }
+
+  /* ── Hamburger → X animation ── */
+  .nav-toggle.open span:nth-child(1) {
+    transform: rotate(45deg) translate(4.5px, 4.5px);
+  }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(4.5px, -4.5px);
   }
 
   /* Hero — stack vertically on tablet */
@@ -1766,6 +1829,22 @@ section {
 
   .hero-col-center h1 { font-size: 1.5rem; }
   .hero-col-center { padding: 40px 24px; min-height: 360px; }
+
+  /* Page hero — reduce title size on phones */
+  .page-hero h1 { font-size: clamp(1.8rem, 9vw, 2.8rem); }
+
+  /* Partners — always 2 columns on mobile */
+  .partners-logos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .partner-logo-item {
+    min-width: 0;
+    width: 100%;
+    padding: 16px 12px;
+  }
+  .partner-logo-text { font-size: 0.82rem; white-space: normal; text-align: center; }
 
   .cat-grid { grid-template-columns: repeat(2, 1fr); }
   .product-grid { grid-template-columns: repeat(2, 1fr); }
