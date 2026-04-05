@@ -2177,6 +2177,19 @@ section {
   opacity: 1;
 }
 
+.partner-logo-text {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--mid);
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.partner-logo-item:hover .partner-logo-text {
+  color: var(--black);
+}
+
 /* ═══════════════════════════════════════════════════════
    RESPONSIVE (inner pages)
    ═══════════════════════════════════════════════════════ */
