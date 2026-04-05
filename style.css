@@ -2438,6 +2438,15 @@ section {
   border-color: rgba(255, 255, 255, 0.5);
 }
 
+.cookie-more {
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: underline;
+  font-size: inherit;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.cookie-more:hover { color: var(--white); }
+
 @media (max-width: 640px) {
   .cookie-banner {
     flex-direction: column;
