@@ -498,7 +498,7 @@ section {
 
 .cat-card-img-wrap {
   overflow: hidden;
-  background: var(--surface);
+  background: var(--white);
 }
 
 .cat-card-img {
