@@ -538,6 +538,29 @@ function setupLangSwitcher() {
   });
 }
 
+/* ── Cookie banner ─────────────────────────────────────── */
+function setupCookieBanner() {
+  const banner = document.getElementById("cookieBanner");
+  if (!banner) return;
+
+  // Already decided → don't show
+  if (localStorage.getItem("ac_cookies")) return;
+
+  // Show after short delay so page loads first
+  setTimeout(() => banner.removeAttribute("hidden"), 900);
+
+  function dismiss(accepted) {
+    localStorage.setItem("ac_cookies", accepted ? "1" : "0");
+    banner.style.animation = "cookieSlideUp 0.3s ease reverse";
+    setTimeout(() => banner.setAttribute("hidden", ""), 280);
+  }
+
+  banner.querySelector(".cookie-accept")
+    ?.addEventListener("click", () => dismiss(true));
+  banner.querySelector(".cookie-decline")
+    ?.addEventListener("click", () => dismiss(false));
+}
+
 /* ── Init ──────────────────────────────────────────────── */
 setupNav();
 setupInquiryModal();
@@ -548,3 +571,4 @@ updateWALinks();
 setupReveal();
 setupLangSwitcher();
 applyTranslations();
+setupCookieBanner();
