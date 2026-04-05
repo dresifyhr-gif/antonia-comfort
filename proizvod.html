@@ -28,14 +28,36 @@
     <div class="navbar-inner">
       <a class="nav-logo" href="index.html">ANTONIA COMFORT</a>
       <div class="nav-links">
-        <a href="index.html">Početna</a>
-        <a href="o-nama.html">O nama</a>
-        <a href="katalog.html" class="active">Proizvodi</a>
-        <a href="kontakt.html">Kontakt</a>
-        <a href="blog.html">Blog</a>
+        <a href="index.html" data-i18n="nav.home">Početna</a>
+        <a href="o-nama.html" data-i18n="nav.about">O nama</a>
+        <a href="katalog.html" class="active" data-i18n="nav.products">Proizvodi</a>
+        <a href="kontakt.html" data-i18n="nav.contact">Kontakt</a>
+        <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      
+        <!-- Language switcher -->
+        <div class="lang-switcher">
+          <button class="lang-current" aria-expanded="false" aria-haspopup="listbox">
+            <span class="lang-flag">🇭🇷</span>
+            <span class="lang-code">HR</span>
+            <svg class="lang-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="lang-dropdown" role="listbox">
+            <li role="option" data-lang="hr">🇭🇷 Hrvatski</li>
+            <li role="option" data-lang="en">🇬🇧 English</li>
+            <li role="option" data-lang="de">🇩🇪 Deutsch</li>
+            <li role="option" data-lang="it">🇮🇹 Italiano</li>
+            <li role="option" data-lang="es">🇪🇸 Español</li>
+            <li role="option" data-lang="fr">🇫🇷 Français</li>
+            <li role="option" data-lang="ru">🇷🇺 Русский</li>
+            <li role="option" data-lang="tr">🇹🇷 Türkçe</li>
+            <li role="option" data-lang="sl">🇸🇮 Slovenščina</li>
+            <li role="option" data-lang="hu">🇭🇺 Magyar</li>
+            <li role="option" data-lang="ar">🇸🇦 العربية</li>
+          </ul>
+        </div>
       </div>
       <div class="nav-right">
-        <a class="btn btn-black" href="#inquiry-modal" data-open-inquiry>Zatraži ponudu</a>
+        <a class="btn btn-black" href="#inquiry-modal" data-open-inquiry data-i18n="nav.cta">Zatraži ponudu</a>
       </div>
       <button class="nav-toggle" aria-label="Otvori izbornik">
         <span></span><span></span><span></span>
@@ -48,9 +70,9 @@
     <div class="container">
 
       <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="index.html">Početna</a>
+        <a href="index.html" data-i18n="nav.home">Početna</a>
         <span>/</span>
-        <a href="katalog.html">Katalog</a>
+        <a href="katalog.html" data-i18n="nav.products">Katalog</a>
         <span>/</span>
         <span id="productBreadcrumb">Proizvod</span>
       </nav>
@@ -86,12 +108,12 @@
     <div class="container footer-inner">
       <span class="footer-logo">ANTONIA COMFORT</span>
       <nav class="footer-links">
-        <a href="katalog.html">Katalog</a>
-        <a href="o-nama.html">O nama</a>
-        <a href="kontakt.html">Kontakt</a>
-        <a href="blog.html">Blog</a>
+        <a href="katalog.html" data-i18n="nav.products">Katalog</a>
+        <a href="o-nama.html" data-i18n="nav.about">O nama</a>
+        <a href="kontakt.html" data-i18n="nav.contact">Kontakt</a>
+        <a href="blog.html" data-i18n="nav.blog">Blog</a>
       </nav>
-      <span class="footer-copy">© 2026 Unariva d.o.o. Sva prava pridržana.</span>
+      <span class="footer-copy" data-i18n="ft.copy">© 2026 Unariva d.o.o. Sva prava pridržana.</span>
     </div>
   </footer>
 
@@ -101,9 +123,9 @@
     <div class="inquiry-dialog" role="dialog" aria-modal="true" aria-labelledby="inquiryTitle">
       <button class="inquiry-close" type="button" aria-label="Zatvori" data-close-inquiry>&times;</button>
 
-      <p class="inquiry-eyebrow">Veleprodajni upit</p>
-      <h2 id="inquiryTitle">Zatraži ponudu</h2>
-      <p class="inquiry-intro">Pošaljite informacije i pripremit ćemo ponudu s MOQ uvjetima i rokovima.</p>
+      <p class="inquiry-eyebrow" data-i18n="modal.eyebrow">Veleprodajni upit</p>
+      <h2 id="inquiryTitle" data-i18n="modal.title">Zatraži ponudu</h2>
+      <p class="inquiry-intro" data-i18n="modal.intro">Pošaljite informacije i pripremit ćemo ponudu s MOQ uvjetima i rokovima.</p>
       <p class="inquiry-context" id="inquiryContext" hidden></p>
 
       <form class="inquiry-form" id="inquiryForm">
@@ -158,6 +180,7 @@
     </svg>
   </a>
 
+  <script src="translations.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
