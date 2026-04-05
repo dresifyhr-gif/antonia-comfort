@@ -3,7 +3,7 @@
    ═══════════════════════════════════════════════════════ */
 
 const WHATSAPP_NUMBER = "385919191235";
-const FORMSPREE_ID    = "YOUR_FORM_ID"; // formspree.io → New Form → copy ID
+const FORM_ENDPOINT   = "https://formsubmit.co/ajax/info.antoniacomfort@gmail.com";
 
 /* ── Category definitions ──────────────────────────────── */
 const categoryDefs = [
@@ -334,10 +334,10 @@ function setupInquiryModal() {
     const waFallback = `<br><a class="wa-fallback-link" href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener">Kontaktirajte nas na WhatsApp →</a>`;
 
     try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const res = await fetch(`https://formsubmit.co/ajax/info.antoniacomfort@gmail.com`, {
         method: "POST",
-        body: new FormData(form),
-        headers: { Accept: "application/json" },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
       });
       if (res.ok) {
         if (successEl) {
@@ -374,10 +374,10 @@ function setupContactForm() {
     if (msgEl) { msgEl.className = "form-msg"; msgEl.style.display = "none"; }
 
     try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const res = await fetch(`https://formsubmit.co/ajax/info.antoniacomfort@gmail.com`, {
         method: "POST",
-        body: new FormData(form),
-        headers: { Accept: "application/json" },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
       });
       if (res.ok) {
         if (msgEl) { msgEl.textContent = "Poruka je zaprimljena. Javit ćemo Vam se uskoro."; msgEl.className = "form-msg success visible"; }
