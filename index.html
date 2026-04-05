@@ -99,14 +99,31 @@
     <div class="navbar-inner">
       <a class="nav-logo" href="index.html">ANTONIA COMFORT</a>
       <div class="nav-links">
-        <a href="index.html" class="active">Početna</a>
-        <a href="o-nama.html">O nama</a>
-        <a href="katalog.html">Proizvodi</a>
-        <a href="kontakt.html">Kontakt</a>
-        <a href="blog.html">Blog</a>
+        <a href="index.html" class="active" data-i18n="nav.home">Početna</a>
+        <a href="o-nama.html" data-i18n="nav.about">O nama</a>
+        <a href="katalog.html" data-i18n="nav.products">Proizvodi</a>
+        <a href="kontakt.html" data-i18n="nav.contact">Kontakt</a>
+        <a href="blog.html" data-i18n="nav.blog">Blog</a>
       </div>
       <div class="nav-right">
-        <a class="btn btn-black" href="#inquiry-modal" data-open-inquiry>Zatraži ponudu</a>
+        <!-- Language switcher -->
+        <div class="lang-switcher">
+          <button class="lang-current" aria-expanded="false" aria-haspopup="listbox">
+            <span class="lang-flag">🇭🇷</span>
+            <span class="lang-code">HR</span>
+            <svg class="lang-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="lang-dropdown" role="listbox">
+            <li role="option" data-lang="hr">🇭🇷 Hrvatski</li>
+            <li role="option" data-lang="en">🇬🇧 English</li>
+            <li role="option" data-lang="de">🇩🇪 Deutsch</li>
+            <li role="option" data-lang="it">🇮🇹 Italiano</li>
+            <li role="option" data-lang="tr">🇹🇷 Türkçe</li>
+            <li role="option" data-lang="sl">🇸🇮 Slovenščina</li>
+            <li role="option" data-lang="hu">🇭🇺 Magyar</li>
+          </ul>
+        </div>
+        <a class="btn btn-black" href="#inquiry-modal" data-open-inquiry data-i18n="nav.cta">Zatraži ponudu</a>
       </div>
       <button class="nav-toggle" aria-label="Otvori izbornik">
         <span></span><span></span><span></span>
@@ -121,15 +138,15 @@
     </div>
 
     <div class="hero-col hero-col-center">
-      <span class="hero-overline">B2B VELEPRODAJA · OD 2002.</span>
-      <h1>VAŠ PARTNER ZA VELEPRODAJU KLOMPI I PAPUČA</h1>
-      <p class="hero-subtitle">
+      <span class="hero-overline" data-i18n="hero.overline">B2B VELEPRODAJA · OD 2002.</span>
+      <h1 data-i18n="hero.title">VAŠ PARTNER ZA VELEPRODAJU KLOMPI I PAPUČA</h1>
+      <p class="hero-subtitle" data-i18n="hero.subtitle">
         Premium proizvođač udobne i medicinske obuće za distributera,
         ljekarne i specijalizirane trgovine diljem Europe.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-white btn-lg" href="katalog.html">POGLEDAJ KATALOG</a>
-        <a class="btn btn-outline-white btn-lg" href="#inquiry-modal" data-open-inquiry>ZATRAŽI PONUDU</a>
+        <a class="btn btn-white btn-lg" href="katalog.html" data-i18n="hero.catalog">POGLEDAJ KATALOG</a>
+        <a class="btn btn-outline-white btn-lg" href="#inquiry-modal" data-open-inquiry data-i18n="hero.inquiry">ZATRAŽI PONUDU</a>
       </div>
     </div>
 
@@ -143,22 +160,22 @@
     <div class="trust-strip-inner">
       <div class="trust-item">
         <span class="trust-num">20+</span>
-        <span class="trust-label">Godina iskustva</span>
+        <span class="trust-label" data-i18n="trust.years">Godina iskustva</span>
       </div>
       <div class="trust-divider"></div>
       <div class="trust-item">
         <span class="trust-num">2002</span>
-        <span class="trust-label">Godina osnivanja</span>
+        <span class="trust-label" data-i18n="trust.founded">Godina osnivanja</span>
       </div>
       <div class="trust-divider"></div>
       <div class="trust-item">
         <span class="trust-num">EU</span>
-        <span class="trust-label">Distribucija</span>
+        <span class="trust-label" data-i18n="trust.dist">Distribucija</span>
       </div>
       <div class="trust-divider"></div>
       <div class="trust-item">
         <span class="trust-num">B2B</span>
-        <span class="trust-label">Isključivo veleprodaja</span>
+        <span class="trust-label" data-i18n="trust.b2b">Isključivo veleprodaja</span>
       </div>
       <div class="trust-divider"></div>
       <div class="trust-item">
@@ -181,23 +198,23 @@
     <div class="container">
       <div class="about-grid">
         <div class="reveal">
-          <p class="section-eyebrow">O nama</p>
-          <h2 class="section-title">Pouzdanost<br>od 2002.</h2>
+          <p class="section-eyebrow" data-i18n="about.eyebrow">O nama</p>
+          <h2 class="section-title" data-i18n-html="about.title">Pouzdanost<br>od 2002.</h2>
           <span class="section-divider"></span>
           <div class="about-text-stack">
-            <p class="about-text">Unariva d.o.o. je proizvođač i distributer obuće s tradicijom od 2002. godine. Već više od 20 godina razvijamo kvalitetna rješenja za profesionalnu i svakodnevnu upotrebu, s posebnim fokusom na medicinske klompe i udobnu radnu obuću.</p>
-            <p class="about-text">Naši proizvodi prisutni su u ljekarnama, zdravstvenim ustanovama i specijaliziranim trgovinama diljem regije, gdje su prepoznati po pouzdanosti, dugotrajnosti i udobnosti.</p>
-            <p class="about-text">Uz medicinsku liniju, razvijamo i kolekcije natikača i papuča prilagođenih modernim potrebama tržišta.</p>
-            <p class="about-text">Kao stabilan partner, surađujemo s veleprodajnim kupcima i distributerima, nudeći sigurnu isporuku i konstantnu kvalitetu.</p>
+            <p class="about-text" data-i18n="about.p1">Unariva d.o.o. je proizvođač i distributer obuće s tradicijom od 2002. godine. Već više od 20 godina razvijamo kvalitetna rješenja za profesionalnu i svakodnevnu upotrebu, s posebnim fokusom na medicinske klompe i udobnu radnu obuću.</p>
+            <p class="about-text" data-i18n="about.p2">Naši proizvodi prisutni su u ljekarnama, zdravstvenim ustanovama i specijaliziranim trgovinama diljem regije, gdje su prepoznati po pouzdanosti, dugotrajnosti i udobnosti.</p>
+            <p class="about-text" data-i18n="about.p3">Uz medicinsku liniju, razvijamo i kolekcije natikača i papuča prilagođenih modernim potrebama tržišta.</p>
+            <p class="about-text" data-i18n="about.p4">Kao stabilan partner, surađujemo s veleprodajnim kupcima i distributerima, nudeći sigurnu isporuku i konstantnu kvalitetu.</p>
           </div>
         </div>
         <div class="reveal" style="transition-delay:100ms">
           <ul class="about-bullets">
-            <li><span class="check">✓</span>20+ godina iskustva u industriji obuće</li>
-            <li><span class="check">✓</span>Osnovan 2002. godine u Zagrebu</li>
-            <li><span class="check">✓</span>Aktivna suradnja s ljekarnama i bolnicama</li>
-            <li><span class="check">✓</span>Veleprodaja diljem regije i EU</li>
-            <li><span class="check">✓</span>OEM i Private Label mogućnosti</li>
+            <li><span class="check">✓</span><span data-i18n="about.b1">20+ godina iskustva u industriji obuće</span></li>
+            <li><span class="check">✓</span><span data-i18n="about.b2">Osnovan 2002. godine u Zagrebu</span></li>
+            <li><span class="check">✓</span><span data-i18n="about.b3">Aktivna suradnja s ljekarnama i bolnicama</span></li>
+            <li><span class="check">✓</span><span data-i18n="about.b4">Veleprodaja diljem regije i EU</span></li>
+            <li><span class="check">✓</span><span data-i18n="about.b5">OEM i Private Label mogućnosti</span></li>
           </ul>
         </div>
       </div>
@@ -207,8 +224,8 @@
   <!-- ═══ KATEGORIJE ════════════════════════════════════ -->
   <section class="categories-section" id="proizvodi">
     <div class="container">
-      <p class="section-eyebrow">Asortiman</p>
-      <h2 class="section-title">Naše kategorije</h2>
+      <p class="section-eyebrow" data-i18n="cat.eyebrow">Asortiman</p>
+      <h2 class="section-title" data-i18n="cat.title">Naše kategorije</h2>
       <span class="section-divider"></span>
 
       <div class="cat-grid">
@@ -217,8 +234,8 @@
             <img class="cat-card-img" src="images/category-slides.jpg" alt="Medicinske klompe" loading="lazy" />
           </div>
           <div class="cat-card-body">
-            <p class="cat-card-name">Medicinske klompe</p>
-            <p class="cat-card-desc">Certificirane za zdravstvene ustanove</p>
+            <p class="cat-card-name" data-i18n="cat.med.name">Medicinske klompe</p>
+            <p class="cat-card-desc" data-i18n="cat.med.desc">Certificirane za zdravstvene ustanove</p>
           </div>
         </a>
 
@@ -227,8 +244,8 @@
             <img class="cat-card-img" src="images/category-leather.jpg" alt="Kožne klompe" loading="lazy" />
           </div>
           <div class="cat-card-body">
-            <p class="cat-card-name">Kožne klompe</p>
-            <p class="cat-card-desc">Premium materijal, klasičan dizajn</p>
+            <p class="cat-card-name" data-i18n="cat.leather.name">Kožne klompe</p>
+            <p class="cat-card-desc" data-i18n="cat.leather.desc">Premium materijal, klasičan dizajn</p>
           </div>
         </a>
 
@@ -237,8 +254,8 @@
             <img class="cat-card-img" src="images/category-medical.jpg" alt="Radne klompe" loading="lazy" />
           </div>
           <div class="cat-card-body">
-            <p class="cat-card-name">Radne klompe</p>
-            <p class="cat-card-desc">Otporne, za intenzivnu upotrebu</p>
+            <p class="cat-card-name" data-i18n="cat.work.name">Radne klompe</p>
+            <p class="cat-card-desc" data-i18n="cat.work.desc">Otporne, za intenzivnu upotrebu</p>
           </div>
         </a>
 
@@ -247,8 +264,8 @@
             <img class="cat-card-img" src="images/category-home.jpg" alt="Papuče" loading="lazy" />
           </div>
           <div class="cat-card-body">
-            <p class="cat-card-name">Papuče</p>
-            <p class="cat-card-desc">Comfort linija za svakodnevnu upotrebu</p>
+            <p class="cat-card-name" data-i18n="cat.slipper.name">Papuče</p>
+            <p class="cat-card-desc" data-i18n="cat.slipper.desc">Comfort linija za svakodnevnu upotrebu</p>
           </div>
         </a>
       </div>
@@ -258,24 +275,24 @@
   <!-- ═══ KAKO RADIMO ══════════════════════════════════ -->
   <section class="process-section">
     <div class="container">
-      <p class="section-eyebrow">Suradnja</p>
-      <h2 class="section-title">Kako radimo</h2>
+      <p class="section-eyebrow" data-i18n="proc.eyebrow">Suradnja</p>
+      <h2 class="section-title" data-i18n="proc.title">Kako radimo</h2>
       <span class="section-divider"></span>
       <div class="process-grid">
         <div class="process-step reveal">
           <span class="process-num">01</span>
-          <h3 class="process-title">Kontakt i upit</h3>
-          <p class="process-text">Pošaljite upit putem forme, emaila ili WhatsAppa. Opišite koji asortiman vas zanima i planirane količine. Odgovaramo unutar jednog radnog dana.</p>
+          <h3 class="process-title" data-i18n="proc.s1.title">Kontakt i upit</h3>
+          <p class="process-text" data-i18n="proc.s1.text">Pošaljite upit putem forme, emaila ili WhatsAppa. Opišite koji asortiman vas zanima i planirane količine. Odgovaramo unutar jednog radnog dana.</p>
         </div>
         <div class="process-step reveal" style="transition-delay:80ms">
           <span class="process-num">02</span>
-          <h3 class="process-title">Ponuda i uvjeti</h3>
-          <p class="process-text">Pripremamo personaliziranu ponudu s MOQ uvjetima, cijenama, dostupnim veličinama i rokovima isporuke. Bez skrivenih troškova.</p>
+          <h3 class="process-title" data-i18n="proc.s2.title">Ponuda i uvjeti</h3>
+          <p class="process-text" data-i18n="proc.s2.text">Pripremamo personaliziranu ponudu s MOQ uvjetima, cijenama, dostupnim veličinama i rokovima isporuke. Bez skrivenih troškova.</p>
         </div>
         <div class="process-step reveal" style="transition-delay:160ms">
           <span class="process-num">03</span>
-          <h3 class="process-title">Narudžba i dostava</h3>
-          <p class="process-text">Potvrda narudžbe i isporuka u roku 7–14 radnih dana diljem regije i EU. Gradimo dugoročne partnerske odnose temeljene na pouzdanosti.</p>
+          <h3 class="process-title" data-i18n="proc.s3.title">Narudžba i dostava</h3>
+          <p class="process-text" data-i18n="proc.s3.text">Potvrda narudžbe i isporuka u roku 7–14 radnih dana diljem regije i EU. Gradimo dugoročne partnerske odnose temeljene na pouzdanosti.</p>
         </div>
       </div>
     </div>
@@ -287,25 +304,25 @@
       <img src="images/warehouse.jpg" alt="Antonia Comfort — skladište i distribucija" />
     </div>
     <div class="warehouse-content-col">
-      <p class="section-eyebrow">Kapacitet &amp; Logistika</p>
-      <h2 class="section-title">Stabilan partner.<br>Sigurna isporuka.</h2>
+      <p class="section-eyebrow" data-i18n="wh.eyebrow">Kapacitet &amp; Logistika</p>
+      <h2 class="section-title" data-i18n-html="wh.title">Stabilan partner.<br>Sigurna isporuka.</h2>
       <span class="section-divider"></span>
-      <p class="warehouse-text">Vlastito skladište, provjereni logistički lanci i pouzdani rokovi isporuke — temelj su svakog dugoročnog poslovnog odnosa. Dostavljamo diljem regije i EU tržišta.</p>
+      <p class="warehouse-text" data-i18n="wh.text">Vlastito skladište, provjereni logistički lanci i pouzdani rokovi isporuke — temelj su svakog dugoročnog poslovnog odnosa. Dostavljamo diljem regije i EU tržišta.</p>
       <ul class="warehouse-feats">
-        <li>Isporuka u roku 7–14 radnih dana</li>
-        <li>Kontinuirana dostupnost zaliha</li>
-        <li>Fleksibilni MOQ uvjeti</li>
-        <li>Privatna oznaka / OEM na upit</li>
+        <li data-i18n="wh.f1">Isporuka u roku 7–14 radnih dana</li>
+        <li data-i18n="wh.f2">Kontinuirana dostupnost zaliha</li>
+        <li data-i18n="wh.f3">Fleksibilni MOQ uvjeti</li>
+        <li data-i18n="wh.f4">Privatna oznaka / OEM na upit</li>
       </ul>
-      <a class="btn btn-black btn-lg" href="#inquiry-modal" data-open-inquiry>Zatraži partnerstvo</a>
+      <a class="btn btn-black btn-lg" href="#inquiry-modal" data-open-inquiry data-i18n="wh.cta">Zatraži partnerstvo</a>
     </div>
   </section>
 
   <!-- ═══ KOME ISPORUČUJEMO ════════════════════════════ -->
   <section class="serve-section">
     <div class="container">
-      <p class="section-eyebrow">Naši kupci</p>
-      <h2 class="section-title">Kome isporučujemo</h2>
+      <p class="section-eyebrow" data-i18n="serve.eyebrow">Naši kupci</p>
+      <h2 class="section-title" data-i18n="serve.title">Kome isporučujemo</h2>
       <span class="section-divider"></span>
       <div class="serve-grid">
 
@@ -313,40 +330,40 @@
           <div class="serve-icon">
             <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2z"/><path d="M12 8v8M8 12h8"/></svg>
           </div>
-          <p class="serve-name">Ljekarne</p>
-          <p class="serve-desc">Medicinska i comfort obuća za maloprodaju ljekarni</p>
+          <p class="serve-name" data-i18n="serve.ph.name">Ljekarne</p>
+          <p class="serve-desc" data-i18n="serve.ph.desc">Medicinska i comfort obuća za maloprodaju ljekarni</p>
         </div>
 
         <div class="serve-card reveal" style="transition-delay:60ms">
           <div class="serve-icon">
             <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           </div>
-          <p class="serve-name">Bolnice i klinike</p>
-          <p class="serve-desc">Certifirana radna obuća za medicinsko osoblje</p>
+          <p class="serve-name" data-i18n="serve.hosp.name">Bolnice i klinike</p>
+          <p class="serve-desc" data-i18n="serve.hosp.desc">Certifirana radna obuća za medicinsko osoblje</p>
         </div>
 
         <div class="serve-card reveal" style="transition-delay:120ms">
           <div class="serve-icon">
             <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
           </div>
-          <p class="serve-name">Specijalizirane trgovine</p>
-          <p class="serve-desc">Kompletni asortiman za prodavaonice obuće</p>
+          <p class="serve-name" data-i18n="serve.store.name">Specijalizirane trgovine</p>
+          <p class="serve-desc" data-i18n="serve.store.desc">Kompletni asortiman za prodavaonice obuće</p>
         </div>
 
         <div class="serve-card reveal" style="transition-delay:180ms">
           <div class="serve-icon">
             <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
           </div>
-          <p class="serve-name">EU distributori</p>
-          <p class="serve-desc">Veleprodajna dostava diljem Europe</p>
+          <p class="serve-name" data-i18n="serve.dist.name">EU distributori</p>
+          <p class="serve-desc" data-i18n="serve.dist.desc">Veleprodajna dostava diljem Europe</p>
         </div>
 
         <div class="serve-card reveal" style="transition-delay:240ms">
           <div class="serve-icon">
             <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
-          <p class="serve-name">Zdravstvene ustanove</p>
-          <p class="serve-desc">Grupne narudžbe za ustanove i domove zdravlja</p>
+          <p class="serve-name" data-i18n="serve.health.name">Zdravstvene ustanove</p>
+          <p class="serve-desc" data-i18n="serve.health.desc">Grupne narudžbe za ustanove i domove zdravlja</p>
         </div>
 
       </div>
@@ -356,10 +373,10 @@
   <!-- ═══ NAŠI PARTNERI ══════════════════════════════════ -->
   <section class="partners-section">
     <div class="container">
-      <p class="section-eyebrow">Reference</p>
-      <h2 class="section-title">Naši partneri</h2>
+      <p class="section-eyebrow" data-i18n="partners.eyebrow">Reference</p>
+      <h2 class="section-title" data-i18n="partners.title">Naši partneri</h2>
       <span class="section-divider"></span>
-      <p class="partners-subtitle">Surađujemo s provjerenim online i fizičkim trgovinama diljem regije koji prepoznaju kvalitetu Antonia Comfort asortimana.</p>
+      <p class="partners-subtitle" data-i18n="partners.subtitle">Surađujemo s provjerenim online i fizičkim trgovinama diljem regije koji prepoznaju kvalitetu Antonia Comfort asortimana.</p>
       <div class="partners-logos">
         <div class="partner-logo-item reveal">
           <img src="https://www.therivastore.com/cdn/shop/files/Riva_logo_typo_0fbfea9e-c09a-4fec-a93e-138358737ee8.png?v=1774986474" alt="Theriva Store" loading="lazy" />
@@ -386,15 +403,15 @@
   <!-- ═══ POSTANI PARTNER ═══════════════════════════════ -->
   <section class="partner-section">
     <div class="container">
-      <p class="section-eyebrow">B2B Partnerstvo</p>
-      <h2 class="section-title">Postanite naš<br>veleprodajni partner</h2>
-      <p class="partner-subtitle">
+      <p class="section-eyebrow" data-i18n="pcta.eyebrow">B2B Partnerstvo</p>
+      <h2 class="section-title" data-i18n-html="pcta.title">Postanite naš<br>veleprodajni partner</h2>
+      <p class="partner-subtitle" data-i18n="pcta.subtitle">
         Pridružite se mreži naših distributera i prodajnih partnera diljem Europe.
         MOQ uvjeti, private label i isporuka na upit.
       </p>
       <div class="partner-cta-row">
-        <a class="btn btn-white btn-lg" href="katalog.html">Pogledaj katalog</a>
-        <a class="btn btn-outline-white btn-lg" href="#inquiry-modal" data-open-inquiry>Pošalji upit</a>
+        <a class="btn btn-white btn-lg" href="katalog.html" data-i18n="pcta.catalog">Pogledaj katalog</a>
+        <a class="btn btn-outline-white btn-lg" href="#inquiry-modal" data-open-inquiry data-i18n="pcta.inquiry">Pošalji upit</a>
       </div>
     </div>
   </section>
@@ -406,38 +423,39 @@
 
         <!-- Forma -->
         <div class="reveal">
-          <h3 class="contact-col-title">Pošaljite upit</h3>
+          <h3 class="contact-col-title" data-i18n="ct.form.title">Pošaljite upit</h3>
           <form id="contactForm">
             <input type="hidden" name="_subject" value="Antonia Comfort — Novi upit s web stranice" />
             <div class="form-row">
               <div class="field-group">
-                <label for="cf-company">Ime firme *</label>
-                <input id="cf-company" type="text" name="company" placeholder="Naziv vaše tvrtke" required />
+                <label for="cf-company" data-i18n="ct.company.label">Ime firme *</label>
+                <input id="cf-company" type="text" name="company" placeholder="Naziv vaše tvrtke" data-i18n-placeholder="ct.company.ph" required />
               </div>
               <div class="field-group">
-                <label for="cf-email">Email *</label>
-                <input id="cf-email" type="email" name="email" placeholder="vas@email.hr" required />
+                <label for="cf-email" data-i18n="ct.email.label">Email *</label>
+                <input id="cf-email" type="email" name="email" placeholder="vas@email.hr" data-i18n-placeholder="ct.email.ph" required />
               </div>
             </div>
             <div class="field-group">
-              <label for="cf-phone">Telefon</label>
-              <input id="cf-phone" type="tel" name="phone" placeholder="+385 ..." />
+              <label for="cf-phone" data-i18n="ct.phone.label">Telefon</label>
+              <input id="cf-phone" type="tel" name="phone" placeholder="+385 ..." data-i18n-placeholder="ct.phone.ph" />
             </div>
             <div class="field-group">
-              <label for="cf-message">Poruka *</label>
+              <label for="cf-message" data-i18n="ct.msg.label">Poruka *</label>
               <textarea id="cf-message" name="message" rows="5"
                 placeholder="Opišite koji asortiman vas zanima, planirane količine ili uvjete suradnje."
+                data-i18n-placeholder="ct.msg.ph"
                 required></textarea>
             </div>
-            <button class="btn btn-black btn-full" type="submit">Pošalji upit</button>
+            <button class="btn btn-black btn-full" type="submit" data-i18n="ct.submit">Pošalji upit</button>
             <div id="contactMsg" class="form-msg"></div>
-            <p class="contact-form-note">Odgovaramo unutar 1 radnog dana s ponudom i MOQ informacijama.</p>
+            <p class="contact-form-note" data-i18n="ct.note">Odgovaramo unutar 1 radnog dana s ponudom i MOQ informacijama.</p>
           </form>
         </div>
 
         <!-- Kontakt info -->
         <div class="reveal" style="transition-delay:80ms">
-          <h3 class="contact-col-title">Kontakt informacije</h3>
+          <h3 class="contact-col-title" data-i18n="ct.info.title">Kontakt informacije</h3>
           <ul class="contact-info-list">
             <li class="contact-info-item">
               <div class="contact-info-icon">
@@ -446,7 +464,7 @@
                 </svg>
               </div>
               <div>
-                <p class="contact-info-label">WhatsApp / Telefon</p>
+                <p class="contact-info-label" data-i18n="ct.phone.info">WhatsApp / Telefon</p>
                 <p class="contact-info-value">
                   <a href="https://wa.me/385919191235">+385 91 919 1235</a>
                 </p>
@@ -459,7 +477,7 @@
                 </svg>
               </div>
               <div>
-                <p class="contact-info-label">Email</p>
+                <p class="contact-info-label" data-i18n="ct.email.info">Email</p>
                 <p class="contact-info-value">
                   <a href="mailto:info.antoniacomfort@gmail.com">info.antoniacomfort@gmail.com</a>
                 </p>
@@ -472,8 +490,8 @@
                 </svg>
               </div>
               <div>
-                <p class="contact-info-label">Lokacija</p>
-                <p class="contact-info-value">Zagreb, Hrvatska</p>
+                <p class="contact-info-label" data-i18n="ct.location.label">Lokacija</p>
+                <p class="contact-info-value" data-i18n="ct.location.val">Zagreb, Hrvatska</p>
               </div>
             </li>
             <li class="contact-info-item">
@@ -483,8 +501,8 @@
                 </svg>
               </div>
               <div>
-                <p class="contact-info-label">Radno vrijeme</p>
-                <p class="contact-info-value">Pon – Pet, 08:00 – 16:00</p>
+                <p class="contact-info-label" data-i18n="ct.hours.label">Radno vrijeme</p>
+                <p class="contact-info-value" data-i18n="ct.hours.val">Pon – Pet, 08:00 – 16:00</p>
               </div>
             </li>
           </ul>
@@ -499,12 +517,12 @@
     <div class="container footer-inner">
       <span class="footer-logo">ANTONIA COMFORT</span>
       <nav class="footer-links">
-        <a href="katalog.html">Katalog</a>
-        <a href="o-nama.html">O nama</a>
-        <a href="kontakt.html">Kontakt</a>
-        <a href="blog.html">Blog</a>
+        <a href="katalog.html" data-i18n="ft.catalog">Katalog</a>
+        <a href="o-nama.html" data-i18n="ft.about">O nama</a>
+        <a href="kontakt.html" data-i18n="ft.contact">Kontakt</a>
+        <a href="blog.html" data-i18n="ft.blog">Blog</a>
       </nav>
-      <span class="footer-copy">© 2026 Unariva d.o.o. Sva prava pridržana.</span>
+      <span class="footer-copy" data-i18n="ft.copy">© 2026 Unariva d.o.o. Sva prava pridržana.</span>
     </div>
   </footer>
 
@@ -514,9 +532,9 @@
     <div class="inquiry-dialog" role="dialog" aria-modal="true" aria-labelledby="inquiryTitle">
       <button class="inquiry-close" type="button" aria-label="Zatvori" data-close-inquiry>&times;</button>
 
-      <p class="inquiry-eyebrow">Veleprodajni upit</p>
-      <h2 id="inquiryTitle">Zatraži ponudu</h2>
-      <p class="inquiry-intro">Pošaljite informacije i pripremit ćemo ponudu s MOQ uvjetima i rokovima.</p>
+      <p class="inquiry-eyebrow" data-i18n="modal.eyebrow">Veleprodajni upit</p>
+      <h2 id="inquiryTitle" data-i18n="modal.title">Zatraži ponudu</h2>
+      <p class="inquiry-intro" data-i18n="modal.intro">Pošaljite informacije i pripremit ćemo ponudu s MOQ uvjetima i rokovima.</p>
       <p class="inquiry-context" id="inquiryContext" hidden></p>
 
       <form class="inquiry-form" id="inquiryForm">
@@ -571,6 +589,7 @@
     </svg>
   </a>
 
+  <script src="translations.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

@@ -420,6 +420,70 @@ function setupReveal() {
   els.forEach(el => obs.observe(el));
 }
 
+/* ── i18n ──────────────────────────────────────────────── */
+function t(key) {
+  const lang = localStorage.getItem("ac_lang") || "hr";
+  const dict = (typeof TRANSLATIONS !== "undefined" && TRANSLATIONS[lang]) || {};
+  return dict[key] || (TRANSLATIONS?.hr?.[key]) || key;
+}
+
+function applyTranslations() {
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    el.textContent = t(el.dataset.i18n);
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => {
+    el.innerHTML = t(el.dataset.i18nHtml);
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    el.placeholder = t(el.dataset.i18nPlaceholder);
+  });
+}
+
+function setupLangSwitcher() {
+  const switcher = document.querySelector(".lang-switcher");
+  if (!switcher) return;
+
+  const currentLang = localStorage.getItem("ac_lang") || "hr";
+  const meta = (typeof LANG_META !== "undefined" && LANG_META[currentLang]) || { flag: "🇭🇷", code: "HR" };
+
+  const flagEl = switcher.querySelector(".lang-flag");
+  const codeEl = switcher.querySelector(".lang-code");
+  if (flagEl) flagEl.textContent = meta.flag;
+  if (codeEl) codeEl.textContent = meta.code;
+
+  /* Mark active */
+  switcher.querySelectorAll("[data-lang]").forEach(li => {
+    li.classList.toggle("active", li.dataset.lang === currentLang);
+  });
+
+  const btn = switcher.querySelector(".lang-current");
+  btn?.addEventListener("click", e => {
+    e.stopPropagation();
+    switcher.classList.toggle("open");
+    btn.setAttribute("aria-expanded", switcher.classList.contains("open"));
+  });
+
+  switcher.querySelectorAll("[data-lang]").forEach(li => {
+    li.addEventListener("click", () => {
+      const lang = li.dataset.lang;
+      localStorage.setItem("ac_lang", lang);
+      switcher.classList.remove("open");
+      const m = LANG_META?.[lang] || { flag: "🇭🇷", code: "HR" };
+      if (flagEl) flagEl.textContent = m.flag;
+      if (codeEl) codeEl.textContent = m.code;
+      switcher.querySelectorAll("[data-lang]").forEach(x => x.classList.toggle("active", x.dataset.lang === lang));
+      applyTranslations();
+    });
+  });
+
+  document.addEventListener("click", e => {
+    if (!switcher.contains(e.target)) {
+      switcher.classList.remove("open");
+      btn?.setAttribute("aria-expanded", "false");
+    }
+  });
+}
+
 /* ── Init ──────────────────────────────────────────────── */
 setupNav();
 setupInquiryModal();
@@ -428,3 +492,5 @@ renderCatalogPage();
 renderProductPage();
 updateWALinks();
 setupReveal();
+setupLangSwitcher();
+applyTranslations();
