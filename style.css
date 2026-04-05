@@ -2130,37 +2130,45 @@ section {
 /* ── Language switcher ────────────────────────────────── */
 .lang-switcher {
   position: relative;
+  border-left: 1px solid var(--line);
+  padding-left: 44px;
+  margin-left: 0;
 }
 
 .lang-current {
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 6px 10px;
-  border: 1px solid var(--line);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  background: var(--white);
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: var(--black);
   cursor: pointer;
-  transition: border-color 0.2s;
+  opacity: 0.6;
+  transition: opacity 0.2s;
 }
 
-.lang-current:hover {
-  border-color: var(--black);
+.lang-current:hover,
+.lang-switcher.open .lang-current {
+  opacity: 1;
 }
 
 .lang-flag {
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1;
+  letter-spacing: 0;
 }
 
 .lang-arrow {
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   transition: transform 0.2s;
   flex-shrink: 0;
+  opacity: 0.7;
 }
 
 .lang-switcher.open .lang-arrow {
@@ -2170,11 +2178,12 @@ section {
 .lang-dropdown {
   display: none;
   position: absolute;
-  top: calc(100% + 6px);
-  right: 0;
+  top: calc(100% + 16px);
+  left: 50%;
+  transform: translateX(-50%);
   background: var(--white);
   border: 1px solid var(--line);
-  min-width: 160px;
+  min-width: 164px;
   z-index: 300;
   list-style: none;
   box-shadow: 0 8px 24px rgba(0,0,0,0.10);
@@ -2186,7 +2195,7 @@ section {
 
 .lang-dropdown li {
   padding: 10px 16px;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 500;
   cursor: pointer;
   display: flex;
@@ -2194,6 +2203,7 @@ section {
   gap: 10px;
   transition: background 0.15s;
   border-bottom: 1px solid var(--line);
+  letter-spacing: 0.02em;
 }
 
 .lang-dropdown li:last-child {
@@ -2206,11 +2216,6 @@ section {
 
 .lang-dropdown li.active {
   font-weight: 700;
-}
-
-@media (max-width: 768px) {
-  .lang-current { padding: 5px 8px; font-size: 0.68rem; }
-  .lang-dropdown { right: 0; }
 }
 
 /* ── Partners section ─────────────────────────────────── */
