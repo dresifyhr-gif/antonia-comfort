@@ -2127,6 +2127,56 @@ section {
 }
 
 
+/* ── Partners section ─────────────────────────────────── */
+.partners-section {
+  padding: 80px 0;
+  border-top: 1px solid var(--line);
+}
+
+.partners-subtitle {
+  max-width: 560px;
+  color: var(--mid);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 48px;
+}
+
+.partners-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+}
+
+.partner-logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 32px;
+  border: 1px solid var(--line);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: var(--white);
+}
+
+.partner-logo-item:hover {
+  border-color: var(--black);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.partner-logo-item img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: filter 0.2s, opacity 0.2s;
+}
+
+.partner-logo-item:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
 /* ═══════════════════════════════════════════════════════
    RESPONSIVE (inner pages)
    ═══════════════════════════════════════════════════════ */
