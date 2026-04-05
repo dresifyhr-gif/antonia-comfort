@@ -428,6 +428,12 @@ function t(key) {
 }
 
 function applyTranslations() {
+  const lang = localStorage.getItem("ac_lang") || "hr";
+  /* RTL for Arabic */
+  const isRtl = (typeof LANG_META !== "undefined" && LANG_META[lang]?.rtl) || false;
+  document.documentElement.dir = isRtl ? "rtl" : "ltr";
+  document.documentElement.lang = lang;
+
   document.querySelectorAll("[data-i18n]").forEach(el => {
     el.textContent = t(el.dataset.i18n);
   });
