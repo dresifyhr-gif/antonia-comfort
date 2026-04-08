@@ -7,63 +7,57 @@ const FORM_ENDPOINT   = "https://formsubmit.co/ajax/info.antoniacomfort@gmail.co
 
 /* ── Category definitions ──────────────────────────────── */
 const categoryDefs = [
-  { key: "medicinske-klompe", label: "Medicinske Klompe", image: "images/photo_17_2026-03-31_22-30-34.jpg" },
-  { key: "kozne-klompe",      label: "Kožne Klompe",      image: "images/photo_27_2026-03-31_22-30-34.jpg" },
-  { key: "radne-klompe",      label: "Radne Klompe",      image: "images/photo_26_2026-03-31_22-30-34.jpg" },
-  { key: "papuce",            label: "Papuče",             image: "images/photo_15_2026-03-31_22-30-34.jpg" },
+  {
+    key:   "zenske-papuce-ljetne",
+    label: "Ženske ljetne papuče",
+    sub:   "Djelomično koža",
+  },
+  {
+    key:   "zenske-klompe-ljetne",
+    label: "Ženske ljetne klompe",
+    sub:   "Umjetni materijali",
+  },
 ];
 
-/* ── Product data generation ───────────────────────────── */
-const sizeOptions  = ["36-41", "36-42", "37-42", "38-46", "39-46"];
-const colorOptions = ["Bijela", "Krem", "Antracit", "Maslinasta", "Navy", "Pijesak", "Taupe", "Cognac"];
-const nameWords    = ["Pro", "Med", "Comfort", "Classic", "Active", "Soft", "Elite", "Basic"];
-const moqOptions   = [50, 80, 100, 120, 150];
+/* ── Real product data ─────────────────────────────────────
+   Format: { sku, name, image, categoryKey, size, moq, description }
+   Update size/moq/description when client provides details.
+   ─────────────────────────────────────────────────────────── */
+const products = [
+  /* ── Ženske ljetne papuče — djelomično koža (AP001–AP020) ── */
+  ...Array.from({ length: 20 }, (_, i) => {
+    const n = String(i + 1).padStart(3, "0");
+    return {
+      id:            `ap${n}`,
+      sku:           `AP${n}`,
+      name:          "Ženska ljetna papuča",
+      image:         `images/products/AP${n}_zenska_ljetna_papuca.jpg`,
+      categoryKey:   "zenske-papuce-ljetne",
+      categoryLabel: "Ženske ljetne papuče",
+      material:      "Djelomično koža",
+      size:          "36-41",
+      moq:           100,
+      description:   "Ženska ljetna papuča s djelomično kožnim gornjištem. Lagana, udobna i izdržljiva — idealna za lljekarne, wellness centre i specijalizirane prodavaonice.",
+    };
+  }),
 
-function buildProductFiles() {
-  const files = [];
-  for (let i = 1; i <= 41; i++) {
-    files.push(`photo_${i}_2026-03-31_22-30-12.jpg`);
-    files.push(`photo_${i}_2026-03-31_22-30-34.jpg`);
-  }
-  for (let i = 42; i <= 92; i++) {
-    files.push(`photo_${i}_2026-03-31_22-30-12.jpg`);
-    files.push(`photo_${i}_2026-03-31_22-30-35.jpg`);
-  }
-  for (let i = 93; i <= 100; i++) {
-    files.push(`photo_${i}_2026-03-31_22-30-12.jpg`);
-  }
-  return files;
-}
-
-function getVariant(file) {
-  if (file.includes("22-30-35")) return "B";
-  if (file.includes("22-30-34")) return "A";
-  return "C";
-}
-
-function createProduct(file, index) {
-  const m   = file.match(/photo_(\d+)_/);
-  const num = Number(m?.[1] || index + 1);
-  const vOf = file.includes("22-30-35") ? 2 : file.includes("22-30-34") ? 1 : 0;
-  const cat  = categoryDefs[(num - 1) % categoryDefs.length];
-  const v    = getVariant(file);
-  const sku  = `UV-${String(num).padStart(3, "0")}-${v}`;
-
-  return {
-    id:            sku.toLowerCase(),
-    sku,
-    name:          `${cat.label.split(" ")[0]} ${nameWords[(num + vOf) % nameWords.length]}`,
-    image:         `images/${file}`,
-    categoryKey:   cat.key,
-    categoryLabel: cat.label,
-    color:         colorOptions[(num + vOf) % colorOptions.length],
-    size:          sizeOptions[(num + vOf) % sizeOptions.length],
-    moq:           moqOptions[(num + index) % moqOptions.length],
-    description:   "Premium model pripremljen za veleprodajne kupce koji traže stabilnu kvalitetu, jasne MOQ uvjete i dugoročnu poslovnu suradnju.",
-  };
-}
-
-const products = buildProductFiles().map(createProduct);
+  /* ── Ženske ljetne klompe — umjetni materijali (DK001–DK028) ── */
+  ...Array.from({ length: 28 }, (_, i) => {
+    const n = String(i + 1).padStart(3, "0");
+    return {
+      id:            `dk${n}`,
+      sku:           `DK${n}`,
+      name:          "Ženska ljetna klompa",
+      image:         `images/products/DK${n}_zenska_ljetna_klompa.jpg`,
+      categoryKey:   "zenske-klompe-ljetne",
+      categoryLabel: "Ženske ljetne klompe",
+      material:      "Umjetni materijali",
+      size:          "36-42",
+      moq:           100,
+      description:   "Ženska ljetna klompa od visokokvalitetnih umjetnih materijala. Lako se čisti, otporna na vlagu — popularan izbor za medicinske ustanove i wellness.",
+    };
+  }),
+];
 
 /* ── Render catalog card (new design) ──────────────────── */
 function renderCatalogCard(product, index) {
