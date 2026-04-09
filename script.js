@@ -231,7 +231,39 @@ function renderCatalogPage() {
       return catOk && sizeOk;
     });
 
-    productGrid.innerHTML = filtered.map(renderCatalogCard).join("");
+    const VISIBLE = 8;
+    const visible = filtered.slice(0, VISIBLE);
+    const locked  = filtered.slice(VISIBLE);
+
+    let html = visible.map(renderCatalogCard).join("");
+
+    if (locked.length > 0) {
+      html += `
+        <div class="catalog-locked-wrap">
+          <div class="catalog-locked-grid">
+            ${locked.map(renderCatalogCard).join("")}
+          </div>
+          <div class="catalog-locked-overlay">
+            <div class="catalog-locked-cta">
+              <p class="catalog-locked-count">${locked.length} modela dostupno</p>
+              <h3 class="catalog-locked-title">Zatražite pristup katalogu</h3>
+              <p class="catalog-locked-sub">Pošaljite upit putem WhatsAppa ili e-maila i dobijte cijeli katalog s cijenama.</p>
+              <div class="catalog-locked-btns">
+                <a class="btn btn-black" href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right:6px;vertical-align:-3px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.849L.057 23.571a.5.5 0 00.611.61l5.79-1.516A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.938a9.938 9.938 0 01-5.073-1.387l-.364-.215-3.769.988.988-3.688-.236-.38A9.938 9.938 0 012.063 12C2.063 6.505 6.505 2.063 12 2.063S21.938 6.505 21.938 12 17.495 21.938 12 21.938z"/></svg>
+                  WhatsApp
+                </a>
+                <a class="btn btn-outline" href="mailto:info.antoniacomfort@gmail.com">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;vertical-align:-2px"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+                  E-mail
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    productGrid.innerHTML = html;
     if (countEl) countEl.textContent = `${filtered.length} modela`;
     if (emptyEl) emptyEl.hidden = filtered.length > 0;
   }
