@@ -20,8 +20,7 @@ const categoryDefs = [
 ];
 
 /* ── Real product data ─────────────────────────────────────
-   Format: { sku, name, image, categoryKey, size, moq, description }
-   Update size/moq/description when client provides details.
+   Ženske veličine: 37-41 | Muške veličine: 41-47 | MOQ: 10
    ─────────────────────────────────────────────────────────── */
 const products = [
   /* ── Ženske ljetne papuče — djelomično koža (AP001–AP020) ── */
@@ -35,9 +34,9 @@ const products = [
       categoryKey:   "zenske-papuce-ljetne",
       categoryLabel: "Ženske ljetne papuče",
       material:      "Djelomično koža",
-      size:          "36-41",
-      moq:           100,
-      description:   "Ženska ljetna papuča s djelomično kožnim gornjištem. Lagana, udobna i izdržljiva — idealna za lljekarne, wellness centre i specijalizirane prodavaonice.",
+      size:          "37-41",
+      moq:           10,
+      description:   "Ženska ljetna papuča s djelomično kožnim gornjištem. Lagana, udobna i izdržljiva — idealna za ljekarne, wellness centre i specijalizirane prodavaonice.",
     };
   }),
 
@@ -52,8 +51,42 @@ const products = [
       categoryKey:   "zenske-klompe-ljetne",
       categoryLabel: "Ženske ljetne klompe",
       material:      "Umjetni materijali",
-      size:          "36-42",
-      moq:           100,
+      size:          "37-41",
+      moq:           10,
+      description:   "Ženska ljetna klompa od visokokvalitetnih umjetnih materijala. Lako se čisti, otporna na vlagu — popularan izbor za medicinske ustanove i wellness.",
+    };
+  }),
+
+  /* ── Ženske ljetne klompe — 700 serija (700-D1–D30) ── */
+  ...Array.from({ length: 30 }, (_, i) => {
+    const n = i + 1;
+    return {
+      id:            `700d${n}`,
+      sku:           `700-D${n}`,
+      name:          "Ženska ljetna klompa",
+      image:         `images/products/700-D${n}_zenska_klompa_ljeto.jpg`,
+      categoryKey:   "zenske-klompe-ljetne",
+      categoryLabel: "Ženske ljetne klompe",
+      material:      "Umjetni materijali",
+      size:          "37-41",
+      moq:           10,
+      description:   "Ženska ljetna klompa od visokokvalitetnih umjetnih materijala. Lako se čisti, otporna na vlagu — popularan izbor za medicinske ustanove i wellness.",
+    };
+  }),
+
+  /* ── Ženske ljetne klompe — 800 serija (800-D1–D16) ── */
+  ...Array.from({ length: 16 }, (_, i) => {
+    const n = i + 1;
+    return {
+      id:            `800d${n}`,
+      sku:           `800-D${n}`,
+      name:          "Ženska ljetna klompa",
+      image:         `images/products/800-D${n}_zenska_klompa_ljeto.jpg`,
+      categoryKey:   "zenske-klompe-ljetne",
+      categoryLabel: "Ženske ljetne klompe",
+      material:      "Umjetni materijali",
+      size:          "37-41",
+      moq:           10,
       description:   "Ženska ljetna klompa od visokokvalitetnih umjetnih materijala. Lako se čisti, otporna na vlagu — popularan izbor za medicinske ustanove i wellness.",
     };
   }),
