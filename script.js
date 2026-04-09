@@ -261,7 +261,7 @@ function renderCatalogPage() {
       return catOk && sizeOk;
     });
 
-    const VISIBLE = 8;
+    const VISIBLE = 4;
     const visible = catalogUnlocked ? filtered : filtered.slice(0, VISIBLE);
     const locked  = catalogUnlocked ? [] : filtered.slice(VISIBLE);
 
