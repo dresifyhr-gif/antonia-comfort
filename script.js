@@ -92,11 +92,11 @@ const products = [
     };
   }),
 
-  /* ── Ženske zimske papuče — umjetni materijali (PP001–PP016) ── */
+  /* ── Ženske zimske papuče — umjetni materijali (PPZ001–PPZ016) ── */
   ...Array.from({ length: 16 }, (_, i) => {
     const n = String(i + 1).padStart(3, "0");
     return {
-      id: `ppz${n}`, sku: `PP${n}`, name: "Ženska zimska papuča",
+      id: `ppz${n}`, sku: `PPZ${n}`, name: "Ženska zimska papuča",
       image: `images/products/PP${n}_zenska_zimska_papuca.jpg`,
       categoryKey: "zenske-papuce-zimske", categoryLabel: "Ženske zimske papuče",
       material: "Umjetni materijali", size: "37-41", moq: 10,
@@ -128,12 +128,12 @@ const products = [
     };
   }),
 
-  /* ── Muške ljetne papuče — umjetni materijali (PP001–PP016) ── */
+  /* ── Muške ljetne papuče — umjetni materijali (PPM001–PPM016) ── */
   ...Array.from({ length: 16 }, (_, i) => {
     const n = String(i + 1).padStart(3, "0");
     const isSandala = n === "012" || n === "013";
     return {
-      id: `ppm${n}`, sku: `PP${n}`, name: isSandala ? "Muška ljetna sandala" : "Muška ljetna papuča",
+      id: `ppm${n}`, sku: `PPM${n}`, name: isSandala ? "Muška ljetna sandala" : "Muška ljetna papuča",
       image: `images/products/PP${n}_muska_ljetna_${isSandala ? "sandala" : "papuca"}.jpg`,
       categoryKey: "muske-papuce-ljetne", categoryLabel: "Muške ljetne papuče",
       material: "Umjetni materijali", size: "41-47", moq: 10,
