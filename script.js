@@ -176,19 +176,27 @@ const CATALOG_KEY = "ac_catalog_key";
 const UNLOCK_CODES = ["AC2025", "ANTONIA2025"]; // klijent može mijenjati
 
 function checkCatalogUnlock() {
-  /* Check URL param */
   const params = new URLSearchParams(window.location.search);
+
+  /* ?lock=1 → reset access */
+  if (params.get("lock") === "1") {
+    localStorage.removeItem(CATALOG_KEY);
+    history.replaceState(null, "", window.location.pathname);
+    return false;
+  }
+
+  /* ?unlock=CODE → validate and save */
   const code = params.get("unlock");
   if (code && UNLOCK_CODES.includes(code.toUpperCase())) {
     localStorage.setItem(CATALOG_KEY, code.toUpperCase());
-    /* Clean URL without reloading */
     const clean = window.location.pathname + (params.get("category") ? `?category=${params.get("category")}` : "");
     history.replaceState(null, "", clean);
     return true;
   }
+
   /* Check localStorage */
   const saved = localStorage.getItem(CATALOG_KEY);
-  return saved && UNLOCK_CODES.includes(saved);
+  return !!(saved && UNLOCK_CODES.includes(saved));
 }
 
 /* ── Catalog page ───────────────────────────────────────── */
