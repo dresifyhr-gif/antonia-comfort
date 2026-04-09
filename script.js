@@ -380,15 +380,16 @@ function setupCatalogAccessForm() {
     btn.disabled = true;
     btn.textContent = "Šaljem...";
     try {
-      await fetch("https://formsubmit.co/ajax/info.antoniacomfort@gmail.com", {
+      await fetch(FORM_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({
-          _subject: `Zahtjev za pristup katalogu — ${f.fullname} / ${f.company}`,
-          _template: "basic",
-          Ime:      f.fullname,
-          Tvrtka:   f.company,
-          Telefon:  f.phone,
+          _template: "table",
+          _subject:  `🔑 Zahtjev za pristup katalogu — ${f.fullname} / ${f.company}`,
+          "Ime i prezime": f.fullname,
+          "Tvrtka":        f.company,
+          "Telefon":       f.phone,
+          "Zahtjev":       "Pristup cijelom katalogu",
         }),
       });
       form.innerHTML = `<p class="catalog-access-success">✓ Upit primljen! Javit ćemo se uskoro.</p>`;
@@ -559,9 +560,20 @@ function setupInquiryModal() {
     const waFallback = `<br><a class="wa-fallback-link" href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener">Kontaktirajte nas na WhatsApp →</a>`;
 
     try {
-      const res = await fetch(`https://formsubmit.co/ajax/info.antoniacomfort@gmail.com`, {
+      const fd = Object.fromEntries(new FormData(form));
+      const payload = {
+        _template: "table",
+        _subject:  `🛒 Novi B2B upit — ${fd.name || ""} / ${fd.company || ""}`,
+        "Ime i prezime": fd.name     || "—",
+        "Tvrtka":        fd.company  || "—",
+        "E-mail":        fd.email    || "—",
+        "Telefon":       fd.phone    || "—",
+        "Količina":      fd.quantity || "—",
+        "Poruka":        fd.message  || "—",
+      };
+      const res = await fetch(FORM_ENDPOINT, {
         method: "POST",
-        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        body: JSON.stringify(payload),
         headers: { "Content-Type": "application/json", Accept: "application/json" },
       });
       if (res.ok) {
@@ -599,9 +611,19 @@ function setupContactForm() {
     if (msgEl) { msgEl.className = "form-msg"; msgEl.style.display = "none"; }
 
     try {
-      const res = await fetch(`https://formsubmit.co/ajax/info.antoniacomfort@gmail.com`, {
+      const fd = Object.fromEntries(new FormData(form));
+      const payload = {
+        _template: "table",
+        _subject:  `📩 Kontakt upit — ${fd.name || ""} / ${fd.company || ""}`,
+        "Ime i prezime": fd.name    || "—",
+        "Tvrtka":        fd.company || "—",
+        "E-mail":        fd.email   || "—",
+        "Telefon":       fd.phone   || "—",
+        "Poruka":        fd.message || "—",
+      };
+      const res = await fetch(FORM_ENDPOINT, {
         method: "POST",
-        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        body: JSON.stringify(payload),
         headers: { "Content-Type": "application/json", Accept: "application/json" },
       });
       if (res.ok) {
