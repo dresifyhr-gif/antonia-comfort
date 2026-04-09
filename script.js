@@ -2,58 +2,69 @@
    Antonia Comfort — script.js
    ═══════════════════════════════════════════════════════ */
 
-const WHATSAPP_NUMBER = "385919191235";
+const WHATSAPP_NUMBER = "3859191901235";
 const FORM_ENDPOINT   = "https://formsubmit.co/ajax/info.antoniacomfort@gmail.com";
 
 /* ── Category definitions ──────────────────────────────── */
 const categoryDefs = [
-  {
-    key:   "zenske-papuce-ljetne",
-    label: "Ženske ljetne papuče",
-    sub:   "Djelomično koža",
-  },
-  {
-    key:   "zenske-klompe-ljetne",
-    label: "Ženske ljetne klompe",
-    sub:   "Umjetni materijali",
-  },
+  { key: "zenske-papuce-ljetne",  label: "Ženske ljetne papuče",  sub: "Koža / Umjetni materijali" },
+  { key: "zenske-klompe-ljetne",  label: "Ženske ljetne klompe",  sub: "Koža / Umjetni materijali" },
+  { key: "zenske-papuce-zimske",  label: "Ženske zimske papuče",  sub: "Umjetni materijali" },
+  { key: "muske-klompe-ljetne",   label: "Muške ljetne klompe",   sub: "Djelomično koža" },
+  { key: "muske-papuce-ljetne",   label: "Muške ljetne papuče",   sub: "Umjetni materijali" },
+  { key: "cizme-zimske",          label: "Zimske čizme",          sub: "Guma / PVC" },
 ];
 
 /* ── Real product data ─────────────────────────────────────
    Ženske veličine: 37-41 | Muške veličine: 41-47 | MOQ: 10
    ─────────────────────────────────────────────────────────── */
 const products = [
+
   /* ── Ženske ljetne papuče — djelomično koža (AP001–AP020) ── */
   ...Array.from({ length: 20 }, (_, i) => {
     const n = String(i + 1).padStart(3, "0");
     return {
-      id:            `ap${n}`,
-      sku:           `AP${n}`,
-      name:          "Ženska ljetna papuča",
-      image:         `images/products/AP${n}_zenska_ljetna_papuca.jpg`,
-      categoryKey:   "zenske-papuce-ljetne",
-      categoryLabel: "Ženske ljetne papuče",
-      material:      "Djelomično koža",
-      size:          "37-41",
-      moq:           10,
-      description:   "Ženska ljetna papuča s djelomično kožnim gornjištem. Lagana, udobna i izdržljiva — idealna za ljekarne, wellness centre i specijalizirane prodavaonice.",
+      id: `ap${n}`, sku: `AP${n}`, name: "Ženska ljetna papuča",
+      image: `images/products/AP${n}_zenska_ljetna_papuca.jpg`,
+      categoryKey: "zenske-papuce-ljetne", categoryLabel: "Ženske ljetne papuče",
+      material: "Djelomično koža", size: "37-41", moq: 10,
+      description: "Ženska ljetna papuča s djelomično kožnim gornjištem. Lagana, udobna i izdržljiva — idealna za ljekarne, wellness centre i specijalizirane prodavaonice.",
     };
   }),
 
-  /* ── Ženske ljetne klompe — umjetni materijali (DK001–DK028) ── */
-  ...Array.from({ length: 28 }, (_, i) => {
+  /* ── Ženske ljetne papuče — umjetni materijali (NP001–NP083) ── */
+  ...Array.from({ length: 83 }, (_, i) => {
     const n = String(i + 1).padStart(3, "0");
     return {
-      id:            `dk${n}`,
-      sku:           `DK${n}`,
-      name:          "Ženska ljetna klompa",
-      image:         `images/products/DK${n}_zenska_ljetna_klompa.jpg`,
-      categoryKey:   "zenske-klompe-ljetne",
-      categoryLabel: "Ženske ljetne klompe",
-      material:      "Umjetni materijali",
-      size:          "37-41",
-      moq:           10,
-      description:   "Ženska ljetna klompa od visokokvalitetnih umjetnih materijala. Lako se čisti, otporna na vlagu — popularan izbor za medicinske ustanove i wellness.",
+      id: `np${n}`, sku: `NP${n}`, name: "Ženska ljetna papuča",
+      image: `images/products/NP${n}_zenske_ljetne_papuce.jpg`,
+      categoryKey: "zenske-papuce-ljetne", categoryLabel: "Ženske ljetne papuče",
+      material: "Umjetni materijali", size: "37-41", moq: 10,
+      description: "Ženska ljetna papuča od visokokvalitetnih umjetnih materijala. Lako se čisti, otporna na vlagu — popularan izbor za medicinske ustanove i wellness.",
+    };
+  }),
+
+  /* ── Ženske ljetne klompe — djelomično koža (AK001–AK072) ── */
+  ...Array.from({ length: 72 }, (_, i) => {
+    const n = String(i + 1).padStart(3, "0");
+    return {
+      id: `ak${n}`, sku: `AK${n}`, name: "Ženska ljetna klompa",
+      image: `images/products/AK${n}_zenska_ljetna_klompa.jpg`,
+      categoryKey: "zenske-klompe-ljetne", categoryLabel: "Ženske ljetne klompe",
+      material: "Djelomično koža", size: "37-41", moq: 10,
+      description: "Ženska ljetna klompa s djelomično kožnim gornjištem. Anatomski oblikovana, izdržljiva i udobna za cijeli radni dan.",
+    };
+  }),
+
+  /* ── Ženske ljetne klompe — umjetni materijali (DK001–DK032) ── */
+  ...Array.from({ length: 32 }, (_, i) => {
+    const n = String(i + 1).padStart(3, "0");
+    return {
+      id: `dk${n}`, sku: `DK${n}`, name: "Ženska ljetna klompa",
+      image: `images/products/DK${n}_zenska_ljetna_klompa.jpg`,
+      categoryKey: "zenske-klompe-ljetne", categoryLabel: "Ženske ljetne klompe",
+      material: "Umjetni materijali", size: "37-41", moq: 10,
+      description: "Ženska ljetna klompa od visokokvalitetnih umjetnih materijala. Lako se čisti, otporna na vlagu — popularan izbor za medicinske ustanove i wellness.",
     };
   }),
 
@@ -61,16 +72,11 @@ const products = [
   ...Array.from({ length: 30 }, (_, i) => {
     const n = i + 1;
     return {
-      id:            `700d${n}`,
-      sku:           `700-D${n}`,
-      name:          "Ženska ljetna klompa",
-      image:         `images/products/700-D${n}_zenska_klompa_ljeto.jpg`,
-      categoryKey:   "zenske-klompe-ljetne",
-      categoryLabel: "Ženske ljetne klompe",
-      material:      "Umjetni materijali",
-      size:          "37-41",
-      moq:           10,
-      description:   "Ženska ljetna klompa od visokokvalitetnih umjetnih materijala. Lako se čisti, otporna na vlagu — popularan izbor za medicinske ustanove i wellness.",
+      id: `700d${n}`, sku: `700-D${n}`, name: "Ženska ljetna klompa",
+      image: `images/products/700-D${n}_zenska_klompa_ljeto.jpg`,
+      categoryKey: "zenske-klompe-ljetne", categoryLabel: "Ženske ljetne klompe",
+      material: "Umjetni materijali", size: "37-41", moq: 10,
+      description: "Ženska ljetna klompa od visokokvalitetnih umjetnih materijala. Lako se čisti, otporna na vlagu — popularan izbor za medicinske ustanove i wellness.",
     };
   }),
 
@@ -78,16 +84,72 @@ const products = [
   ...Array.from({ length: 16 }, (_, i) => {
     const n = i + 1;
     return {
-      id:            `800d${n}`,
-      sku:           `800-D${n}`,
-      name:          "Ženska ljetna klompa",
-      image:         `images/products/800-D${n}_zenska_klompa_ljeto.jpg`,
-      categoryKey:   "zenske-klompe-ljetne",
-      categoryLabel: "Ženske ljetne klompe",
-      material:      "Umjetni materijali",
-      size:          "37-41",
-      moq:           10,
-      description:   "Ženska ljetna klompa od visokokvalitetnih umjetnih materijala. Lako se čisti, otporna na vlagu — popularan izbor za medicinske ustanove i wellness.",
+      id: `800d${n}`, sku: `800-D${n}`, name: "Ženska ljetna klompa",
+      image: `images/products/800-D${n}_zenska_klompa_ljeto.jpg`,
+      categoryKey: "zenske-klompe-ljetne", categoryLabel: "Ženske ljetne klompe",
+      material: "Umjetni materijali", size: "37-41", moq: 10,
+      description: "Ženska ljetna klompa od visokokvalitetnih umjetnih materijala. Lako se čisti, otporna na vlagu — popularan izbor za medicinske ustanove i wellness.",
+    };
+  }),
+
+  /* ── Ženske zimske papuče — umjetni materijali (PP001–PP016) ── */
+  ...Array.from({ length: 16 }, (_, i) => {
+    const n = String(i + 1).padStart(3, "0");
+    return {
+      id: `ppz${n}`, sku: `PP${n}`, name: "Ženska zimska papuča",
+      image: `images/products/PP${n}_zenska_zimska_papuca.jpg`,
+      categoryKey: "zenske-papuce-zimske", categoryLabel: "Ženske zimske papuče",
+      material: "Umjetni materijali", size: "37-41", moq: 10,
+      description: "Ženska zimska papuča od toplih umjetnih materijala. Udobna i topla — idealna za zimsku sezonu u ljekarnama, wellness centrima i specijaliziranim prodavaonicama.",
+    };
+  }),
+
+  /* ── Muške ljetne klompe — djelomično koža (AMK001–AMK006) ── */
+  ...Array.from({ length: 6 }, (_, i) => {
+    const n = String(i + 1).padStart(3, "0");
+    return {
+      id: `amk${n}`, sku: `AMK${n}`, name: "Muška ljetna klompa",
+      image: `images/products/AMK${n}_muska_ljetna_klompa.jpg`,
+      categoryKey: "muske-klompe-ljetne", categoryLabel: "Muške ljetne klompe",
+      material: "Djelomično koža", size: "41-47", moq: 10,
+      description: "Muška ljetna klompa s djelomično kožnim gornjištem. Anatomski oblikovana, izdržljiva i udobna — idealna za medicinske ustanove i radna okruženja.",
+    };
+  }),
+
+  /* ── Muške ljetne klompe — djelomično koža (DMK001–DMK004) ── */
+  ...Array.from({ length: 4 }, (_, i) => {
+    const n = String(i + 1).padStart(3, "0");
+    return {
+      id: `dmk${n}`, sku: `DMK${n}`, name: "Muška ljetna klompa",
+      image: `images/products/DMK${n}_muska_ljetna_klompa.jpg`,
+      categoryKey: "muske-klompe-ljetne", categoryLabel: "Muške ljetne klompe",
+      material: "Djelomično koža", size: "41-47", moq: 10,
+      description: "Muška ljetna klompa s djelomično kožnim gornjištem. Anatomski oblikovana, izdržljiva i udobna — idealna za medicinske ustanove i radna okruženja.",
+    };
+  }),
+
+  /* ── Muške ljetne papuče — umjetni materijali (PP001–PP016) ── */
+  ...Array.from({ length: 16 }, (_, i) => {
+    const n = String(i + 1).padStart(3, "0");
+    const isSandala = n === "012" || n === "013";
+    return {
+      id: `ppm${n}`, sku: `PP${n}`, name: isSandala ? "Muška ljetna sandala" : "Muška ljetna papuča",
+      image: `images/products/PP${n}_muska_ljetna_${isSandala ? "sandala" : "papuca"}.jpg`,
+      categoryKey: "muske-papuce-ljetne", categoryLabel: "Muške ljetne papuče",
+      material: "Umjetni materijali", size: "41-47", moq: 10,
+      description: "Muška ljetna papuča od visokokvalitetnih umjetnih materijala. Lako se čisti, otporna na vlagu — popularan izbor za medicinske ustanove i wellness.",
+    };
+  }),
+
+  /* ── Zimske čizme — guma/PVC (C001–C002) ── */
+  ...Array.from({ length: 2 }, (_, i) => {
+    const n = String(i + 1).padStart(3, "0");
+    return {
+      id: `c${n}`, sku: `C${n}`, name: "Zimska čizma",
+      image: `images/products/C${n}_cizma_zimska_gumenapvc.jpg`,
+      categoryKey: "cizme-zimske", categoryLabel: "Zimske čizme",
+      material: "Guma / PVC", size: "37-47", moq: 10,
+      description: "Zimska čizma od gume i PVC materijala. Vodootporna, neklizajuća i izdržljiva — idealna za zahtjevna radna okruženja.",
     };
   }),
 ];
@@ -457,8 +519,8 @@ function setupNav() {
 
 /* ── Update WA links with real number ──────────────────── */
 function updateWALinks() {
-  document.querySelectorAll('a[href*="385919191235"]').forEach(a => {
-    a.href = a.href.replace("385919191235", WHATSAPP_NUMBER);
+  document.querySelectorAll('a[href*="3859191901235"]').forEach(a => {
+    a.href = a.href.replace("3859191901235", WHATSAPP_NUMBER);
   });
 }
 
