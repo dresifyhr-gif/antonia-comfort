@@ -2,7 +2,7 @@
    Antonia Comfort — script.js
    ═══════════════════════════════════════════════════════ */
 
-const WHATSAPP_NUMBER = "3859191901235";
+const WHATSAPP_NUMBER = "385919190123";
 const FORM_ENDPOINT   = "https://formsubmit.co/ajax/info.antoniacomfort@gmail.com";
 
 /* ── Category definitions ──────────────────────────────── */
@@ -519,8 +519,8 @@ function setupNav() {
 
 /* ── Update WA links with real number ──────────────────── */
 function updateWALinks() {
-  document.querySelectorAll('a[href*="3859191901235"]').forEach(a => {
-    a.href = a.href.replace("3859191901235", WHATSAPP_NUMBER);
+  document.querySelectorAll('a[href*="385919190123"]').forEach(a => {
+    a.href = a.href.replace("385919190123", WHATSAPP_NUMBER);
   });
 }
 
