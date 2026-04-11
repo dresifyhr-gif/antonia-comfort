@@ -12,6 +12,7 @@ const categoryDefs = [
   { key: "zenske-papuce-zimske",  label: "Ženske zimske papuče",  sub: "Umjetni materijali" },
   { key: "muske-klompe-ljetne",   label: "Muške ljetne klompe",   sub: "Djelomično koža" },
   { key: "muske-papuce-ljetne",   label: "Muške ljetne papuče",   sub: "Umjetni materijali" },
+  { key: "muske-papuce-zimske",   label: "Muške zimske papuče",   sub: "Umjetni materijali" },
   { key: "cizme-zimske",          label: "Zimske čizme",          sub: "Guma / PVC" },
 ];
 
@@ -104,6 +105,18 @@ const products = [
     };
   }),
 
+  /* ── Ženske zimske papuče — umjetni materijali (PZ001–PZ018) ── */
+  ...Array.from({ length: 18 }, (_, i) => {
+    const n = String(i + 1).padStart(3, "0");
+    return {
+      id: `pz${n}`, sku: `PZ${n}`, name: "Ženska zimska papuča",
+      image: `images/products/PZ${n}_papuca_zima_zenska.jpg`,
+      categoryKey: "zenske-papuce-zimske", categoryLabel: "Ženske zimske papuče",
+      material: "Umjetni materijali", size: "37-41", moq: 10,
+      description: "Ženska zimska papuča od toplih umjetnih materijala. Udobna i topla — idealna za zimsku sezonu u ljekarnama, wellness centrima i specijaliziranim prodavaonicama.",
+    };
+  }),
+
   /* ── Muške ljetne klompe — djelomično koža (AMK001–AMK006) ── */
   ...Array.from({ length: 6 }, (_, i) => {
     const n = String(i + 1).padStart(3, "0");
@@ -138,6 +151,30 @@ const products = [
       categoryKey: "muske-papuce-ljetne", categoryLabel: "Muške ljetne papuče",
       material: "Umjetni materijali", size: "41-47", moq: 10,
       description: "Muška ljetna papuča od visokokvalitetnih umjetnih materijala. Lako se čisti, otporna na vlagu — popularan izbor za medicinske ustanove i wellness.",
+    };
+  }),
+
+  /* ── Muške ljetne papuče — umjetni materijali (PAP004–PAP020) ── */
+  ...Array.from({ length: 17 }, (_, i) => {
+    const n = String(i + 4).padStart(3, "0");
+    return {
+      id: `pap${n}`, sku: `PAP${n}`, name: "Muška ljetna papuča",
+      image: `images/products/PAP${n}_papuca_ljeto_muska.jpg`,
+      categoryKey: "muske-papuce-ljetne", categoryLabel: "Muške ljetne papuče",
+      material: "Umjetni materijali", size: "41-47", moq: 10,
+      description: "Muška ljetna papuča od visokokvalitetnih umjetnih materijala. Lako se čisti, otporna na vlagu — popularan izbor za medicinske ustanove i wellness.",
+    };
+  }),
+
+  /* ── Muške zimske papuče — umjetni materijali (PAP001–PAP003) ── */
+  ...Array.from({ length: 3 }, (_, i) => {
+    const n = String(i + 1).padStart(3, "0");
+    return {
+      id: `papz${n}`, sku: `PAP${n}`, name: "Muška zimska papuča",
+      image: `images/products/PAP${n}_papuca_zima_muska.jpg`,
+      categoryKey: "muske-papuce-zimske", categoryLabel: "Muške zimske papuče",
+      material: "Umjetni materijali", size: "41-47", moq: 10,
+      description: "Muška zimska papuča od toplih umjetnih materijala. Udobna i topla — idealna za zimsku sezonu u ljekarnama, wellness centrima i specijaliziranim prodavaonicama.",
     };
   }),
 
